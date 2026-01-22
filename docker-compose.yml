@@ -1,0 +1,42 @@
+# =============================================================================
+# Docker Compose for app-info-fetcher
+# =============================================================================
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: app-info-fetcher
+    ports:
+      - "${PORT:-3001}:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/api/app-info"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  # Development service (optional)
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: app-info-fetcher-dev
+    ports:
+      - "${DEV_PORT:-3002}:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    volumes:
+      - ./src:/app/src:ro
+    command: ["npm", "run", "dev"]
+    profiles:
+      - dev

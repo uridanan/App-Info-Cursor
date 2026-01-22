@@ -1,0 +1,48 @@
+# =============================================================================
+# Docker Ignore - Exclude unnecessary files from build context
+# =============================================================================
+
+# Dependencies
+node_modules/
+
+# Build output (rebuilt in container)
+dist/
+
+# Git
+.git/
+.gitignore
+
+# IDE/Editor
+.cursor/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+tests/
+*.test.ts
+*.spec.ts
+coverage/
+jest.config.*
+
+# Documentation
+*.md
+!README.md
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Misc
+*.tgz
+.npmrc
