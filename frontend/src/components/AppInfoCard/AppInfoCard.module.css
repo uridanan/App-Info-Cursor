@@ -1,0 +1,108 @@
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+  border-bottom: 1px solid #eee;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.appName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bundleId {
+  font-size: 0.875rem;
+  color: #718096;
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+  margin: 0 0 8px 0;
+}
+
+.description {
+  padding: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.description h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.description p {
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.7;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.developer {
+  padding: 24px;
+}
+
+.developer h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.developer p {
+  font-size: 0.95rem;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+.developer p:last-child {
+  margin-bottom: 0;
+}
+
+.developer strong {
+  color: #2d3748;
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .appName {
+    white-space: normal;
+  }
+}
