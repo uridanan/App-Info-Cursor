@@ -1,5 +1,6 @@
 ### MISSION
 [Describe your feature or bug fix here in 1-2 sentences]
+Refer to @agents.md for our stack details and follow the @.cursor/rules/00-orchestrator.mdc pipeline.
 
 ### PROTOCOL: AGENTIC_PIPELINE_v1
 - ACTIVATE: .cursor/rules/00-orchestrator.mdc
