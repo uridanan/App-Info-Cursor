@@ -1,0 +1,48 @@
+name: Dependency & Lockfile Check
+
+on:
+  pull_request:
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+
+permissions:
+  contents: write # Required for the bot to push fixes
+
+jobs:
+  verify-and-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }} # Checkout the PR branch specifically
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Check Sync
+        id: check
+        run: |
+          # npm ci --dry-run is the fastest way to detect a mismatch
+          if ! npm ci --dry-run; then
+            echo "sync_required=true" >> $GITHUB_OUTPUT
+          else
+            echo "sync_required=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fix Lockfile (if out of sync)
+        if: steps.check.outputs.sync_required == 'true'
+        run: |
+          echo "Lockfile mismatch detected. Regenerating..."
+          npm install --package-lock-only
+
+      - name: Auto-Commit Fixes
+        if: steps.check.outputs.sync_required == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: automatically sync package-lock.json"
+          file_pattern: 'package-lock.json'
